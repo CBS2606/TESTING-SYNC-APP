@@ -1,0 +1,67 @@
+>>> '{0:<15}'.format('left-justify')
+'left-justify '
+>>> '{0:>15}'.format('right-justify')
+' right-justify'
+>>> '{0:*^15}'.format('centered')
+def find_max (L):
+max = 0
+for x in L:
+if x > max:
+max = x
+return max
+Does this meet the cri
+def find_max (L):
+if len(L) == 1:
+return L[0]
+v1 = L[0]
+v2 = find_max(L[1:])
+if v1 > v2:
+return v1
+else:
+return v2
+"""Simulate the Monty Hall problem.
+4
+5 """
+6
+7 import argparse, random
+8
+9 def simulate(num_doors, switch, verbose):
+10 """(int, bool): bool
+11
+12 Carry out the game for one contestant. If 'switch' is True,
+13 the contestant will switch their chosen door when offered the chance.
+14 Returns a Boolean value telling whether the simulated contestant won.
+15 """
+16
+17 # Doors are numbered from 0 up to num_doors-1 (inclusive).
+18
+19 # Randomly choose the door hiding the prize.
+20 winning_door = random.randint(0, num_doors-1)
+21 if verbose:
+22 print('Prize is behind door {}'.format(winning_door+1))
+23
+24 # The contestant picks a random door, too.
+25 choice = random.randint(0, num_doors-1)
+26 if verbose:
+27 print('Contestant chooses door {}'.format(choice+1))
+28
+29 # The host opens all but two doors.
+30 closed_doors = list(range(num_doors))
+31 while len(closed_doors) > 2:
+32 # Randomly choose a door to open.
+33 door_to_remove = random.choice(closed_doors)
+34
+35 # The host will never open the winning door, or the door
+36 # chosen by the contestant.
+37 if door_to_remove == winning_door or door_to_remove == choice:
+38 continue
+39
+40 # Remove the door from the list of closed doors.
+41 closed_doors.remove(door_to_remove)
+42 if verbose:
+43 print('Host opens door {}'.format(door_to_remove+1))
+44
+45 # There are always two doors remaining.
+18 Chapter 5. Simulating The Monty Hall Problem
+50 Examples Documentation, Release 1.0
+46 assert len(closed_doors) =
